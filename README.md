@@ -1,4 +1,4 @@
-# Trend application
+# Trend application | DevOps Project 2
 
 This is a small application that contains main and test folders.  
 The Main contains the application code.  
