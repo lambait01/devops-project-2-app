@@ -5,10 +5,16 @@ pipeline {
         }
     }
 
+environment {
+    PATH = "/opt/apache-maven-3.9.3/bin:$PATH"
+}
+
     stages {
-        stage('Clone-code') {
+        stage('Build') {
             steps {
-                git branch: 'main', url: 'https://github.com/lambait01/devops-project-2-app.git'
+                echo "----------- build started ----------"
+                sh 'mvn clean deploy -Dmaven.test.skip=true'
+                echo "----------- build complted ----------"
             }
         }
     }
