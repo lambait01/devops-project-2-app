@@ -1,4 +1,4 @@
-def registry = 'https://firstone.jfrog.io/'
+def registry = 'https://firstone.jfrog.io'
 
 pipeline {
     agent {
@@ -52,10 +52,11 @@ pipeline {
             }
         }
 
-        stage("Jar Publish") {
+        stage("Jar Publish") {            
             steps {
                 script {
                      echo '<--------------- Jar Publish Started --------------->'
+                     echo "${env.BUILD_ID}"
                      def server = Artifactory.newServer url:registry+"/artifactory" ,  credentialsId:"artifact_cred"
                      def properties = "buildid=${env.BUILD_ID},commitid=${GIT_COMMIT}";
                      echo "${env.BUILD_ID}"
