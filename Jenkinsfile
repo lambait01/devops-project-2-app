@@ -58,7 +58,7 @@ pipeline {
                      echo '<--------------- Jar Publish Started --------------->'
                      echo "${env.BUILD_ID}"
                      //def server = Artifactory.newServer url:registry+"/artifactory" ,  credentialsId:"artifact_cred"
-                     def server = Artifactory.newServer url:"https://firstone.jfrog.io/artifactory" ,  credentialsId:"artifact_cred";
+                     def server = Artifactory.newServer url:'https://firstone01.jfrog.io/artifactory' ,  username: 'dtlamberto@gmail.com', password: 'jfmeVod@Usa137'
                      def properties = "buildid=${env.BUILD_ID},commitid=${GIT_COMMIT}";
                      echo "${env.BUILD_ID}"
                      def uploadSpec = """{
