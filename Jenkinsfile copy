@@ -1,6 +1,4 @@
 def registry = 'https://firstone01.jfrog.io/'
-def imageName = 'firstone01.jfrog.io/firstone-docker-local/ttrend'
-def version   = '2.1.4'
 
 pipeline {
     agent {
@@ -54,7 +52,7 @@ pipeline {
             }
         }
 
-/*         stage("Jar Publish") {            
+        stage("Jar Publish") {            
             steps {
                 script {
                      echo '<--------------- Jar Publish Started --------------->'
@@ -82,7 +80,7 @@ pipeline {
             
                 }
             }   
-        } */
+        }
 
         stage(" Docker Build ") {
             steps {
@@ -98,7 +96,7 @@ pipeline {
             steps {
                 script {
                     echo '<--------------- Docker Publish Started --------------->'  
-                        docker.withRegistry(registry, 'artifact_cred2'){
+                        docker.withRegistry(registry, 'artfiact-cred'){
                             app.push()
                         }    
                     echo '<--------------- Docker Publish Ended --------------->'  
