@@ -54,7 +54,7 @@ pipeline {
             }
         }
 
-/*         stage("Jar Publish") {            
+        stage("Jar Publish") {            
             steps {
                 script {
                      echo '<--------------- Jar Publish Started --------------->'
@@ -82,7 +82,7 @@ pipeline {
             
                 }
             }   
-        } */
+        }
 
         stage(" Docker Build ") {
             steps {
@@ -105,6 +105,16 @@ pipeline {
                 }
             }
         }
+
+        stage(" Deploy Kubernetes Manifests ") {
+            steps {
+                script {
+                    echo '<--------------- Deploy Kubernetes Manifests --------------->'
+                    sh './deploy.sh'
+                    echo '<--------------- Deploy Kubernetes Manifests Ends --------------->'
+                }
+            }
+        } 
 
 
     }
