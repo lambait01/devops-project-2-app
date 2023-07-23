@@ -54,35 +54,35 @@ pipeline {
             }
         }
 
-        stage("Jar Publish") {            
-            steps {
-                script {
-                     echo '<--------------- Jar Publish Started --------------->'
-                     echo "${env.BUILD_ID}"
-                     def server = Artifactory.newServer url:registry+'/artifactory' ,  credentialsId:'artifact_cred2'
-                     echo "${env.BUILD_ID}"
-                     //def server = Artifactory.newServer url:'https://firstone01.jfrog.io/artifactory' ,  username: 'dtlamberto@gmail.com', password: 'jfmeVod@Usa137'
-                     def properties = "buildid=${env.BUILD_ID},commitid=${GIT_COMMIT}";
-                     echo "${env.BUILD_ID}"
-                     def uploadSpec = """{
-                          "files": [
-                            {
-                              "pattern": "jarstaging/(*)",
-                              "target": "firstone02-libs-release-local/{1}",
-                              "flat": "false",
-                              "props" : "${properties}",
-                              "exclusions": [ "*.sha1", "*.md5"]
-                            }
-                         ]
-                     }"""
-                     def buildInfo = server.upload(uploadSpec)
-                     buildInfo.env.collect()
-                     server.publishBuildInfo(buildInfo)
-                     echo '<--------------- Jar Publish Ended --------------->'  
+        // stage("Jar Publish") {            
+        //     steps {
+        //         script {
+        //              echo '<--------------- Jar Publish Started --------------->'
+        //              echo "${env.BUILD_ID}"
+        //              def server = Artifactory.newServer url:registry+'/artifactory' ,  credentialsId:'artifact_cred2'
+        //              echo "${env.BUILD_ID}"
+        //              //def server = Artifactory.newServer url:'https://firstone01.jfrog.io/artifactory' ,  username: 'dtlamberto@gmail.com', password: 'jfmeVod@Usa137'
+        //              def properties = "buildid=${env.BUILD_ID},commitid=${GIT_COMMIT}";
+        //              echo "${env.BUILD_ID}"
+        //              def uploadSpec = """{
+        //                   "files": [
+        //                     {
+        //                       "pattern": "jarstaging/(*)",
+        //                       "target": "firstone02-libs-release-local/{1}",
+        //                       "flat": "false",
+        //                       "props" : "${properties}",
+        //                       "exclusions": [ "*.sha1", "*.md5"]
+        //                     }
+        //                  ]
+        //              }"""
+        //              def buildInfo = server.upload(uploadSpec)
+        //              buildInfo.env.collect()
+        //              server.publishBuildInfo(buildInfo)
+        //              echo '<--------------- Jar Publish Ended --------------->'  
             
-                }
-            }   
-        }
+        //         }
+        //     }   
+        // }
 
         stage(" Docker Build ") {
             steps {
