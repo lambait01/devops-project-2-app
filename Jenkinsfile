@@ -106,15 +106,25 @@ pipeline {
             }
         }
 
-        stage(" Deploy Kubernetes Manifests ") {
+        // stage(" Deploy Kubernetes Manifests ") {
+        //     steps {
+        //         script {
+        //             echo '<--------------- Deploy Kubernetes Manifests --------------->'
+        //             sh './deploy.sh'
+        //             echo '<--------------- Deploy Kubernetes Manifests Ends --------------->'
+        //         }
+        //     }
+        // } 
+
+        stage(" Deploy with helm ") {
             steps {
                 script {
-                    echo '<--------------- Deploy Kubernetes Manifests --------------->'
-                    sh './deploy.sh'
-                    echo '<--------------- Deploy Kubernetes Manifests Ends --------------->'
+                    echo '<--------------- Helm Deploy Started --------------->'
+                    sh 'helm install ttrend ttrend-0.1.0.tgzadd'
+                    echo '<--------------- Helm deploy Ends --------------->'
                 }
             }
-        } 
+        }  
 
 
     }
